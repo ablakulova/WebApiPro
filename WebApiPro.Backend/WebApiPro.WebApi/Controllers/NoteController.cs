@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace WebApiPro.WebApi.Controllers
         public NoteController(IMapper mapper) => _mapper = mapper;
 
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<NoteListVm>> GetAll()
         {
             var query = new GetNoteListQuery
@@ -32,6 +34,7 @@ namespace WebApiPro.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<NoteDetailsVm>> Get(Guid id)
         {
             var query = new GetNoteDetailsQuery
@@ -45,6 +48,7 @@ namespace WebApiPro.WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateNoteDto createNoteDto)
         {
             var command = _mapper.Map<CreateNoteCommand>(createNoteDto);
@@ -54,6 +58,7 @@ namespace WebApiPro.WebApi.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         public async Task<ActionResult> Update([FromBody] UpdateNoteDto updateNoteDto)
         {
             var command = _mapper.Map<UpdateNoteCommand>(updateNoteDto);
@@ -63,6 +68,7 @@ namespace WebApiPro.WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteNoteCommand
