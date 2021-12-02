@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApiPro.Application.Common.Mappings;
@@ -10,6 +11,7 @@ namespace WebApiPro.WebApi.Models
 {
     public class CreateNoteDto : IMapWith<CreateNoteCommand>
     {
+        [Required]
         public string Title { get; set; }
         public string Details { get; set; }
 
