@@ -16,6 +16,7 @@ using WebApiPro.Application;
 using WebApiPro.Application.Common.Mappings;
 using WebApiPro.Application.Interfaces;
 using WebApiPro.Persistence;
+using WebApiPro.WebApi.Services;
 
 namespace WebApiPro.WebApi
 {
@@ -62,6 +63,8 @@ namespace WebApiPro.WebApi
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 config.IncludeXmlComments(xmlPath);
             });
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
+            services.AddHttpContextAccessor();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
